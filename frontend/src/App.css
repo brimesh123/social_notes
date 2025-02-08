@@ -13,6 +13,16 @@ body {
   color: #333;
 }
 
+
+.form-container {
+  margin-right: 40% !important;
+  margin: 2rem -2% !important;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px #0000001a;
+}
+
 .app {
   display: flex;
   flex-direction: column;
