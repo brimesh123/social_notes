@@ -22,7 +22,7 @@ const ProfileSearch = () => {
       return;
     }
     try {
-      const res = await axios.get('https://social-notes.onrender.com/api/search/users?q=${searchQuery}', {
+      const res = await axios.get(`https://social-notes.onrender.com/api/search/users?q=${searchQuery}`, {
         headers: { 'x-auth-token': token }
       });
       setUsers(res.data);
@@ -42,8 +42,8 @@ const ProfileSearch = () => {
   const fetchPublicNotes = async (userId, passkey = '') => {
     try {
       const url = passkey
-        ? 'https://social-notes.onrender.com/api/search/notes/${userId}?passkey=${encodeURIComponent(passkey)}'
-        : 'https://social-notes.onrender.com/api/search/notes/${userId}';
+        ? `https://social-notes.onrender.com/api/search/notes/${userId}?passkey=${encodeURIComponent(passkey)}`
+        : `https://social-notes.onrender.com/api/search/notes/${userId}`;
       const res = await axios.get(url, {
         headers: { 'x-auth-token': token }
       });
