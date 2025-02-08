@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Profile.css'; // Ensure you have your CSS imported
+import { API_URL } from '../../src/config'; // Adjust path as needed
+
 
 const Profile = () => {
   // Added 'passkey' to the profile state
@@ -19,7 +21,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/profile', {
+        const res = await axios.get('${API_URL}/api/profile', {
           headers: { 'x-auth-token': token },
         });
         setProfile(res.data);
@@ -42,7 +44,7 @@ const Profile = () => {
     try {
       const formData = new FormData();
       formData.append('photo', file);
-      const res = await axios.post('http://localhost:5000/api/upload', formData, {
+      const res = await axios.post('${API_URL}/api/upload', formData, {
         headers: {
           'x-auth-token': token,
           'Content-Type': 'multipart/form-data',
@@ -60,7 +62,7 @@ const Profile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put('http://localhost:5000/api/profile', profile, {
+      const res = await axios.put('${API_URL}/api/profile', profile, {
         headers: { 'x-auth-token': token },
       });
       setProfile(res.data);
