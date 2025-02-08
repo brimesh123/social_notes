@@ -14,7 +14,7 @@ const Dashboard = () => {
   // Fetch all notes for the logged-in user
   const fetchNotes = async () => {
     try {
-      const res = await axios.get(`${API_URL}/api/notes`, {
+      const res = await axios.get('https://social-notes.onrender.com/api/notes', {
         headers: { 'x-auth-token': token }
       });
       setNotes(res.data);
@@ -55,7 +55,7 @@ const Dashboard = () => {
         );
       } else {
         // Create note
-        const res = await axios.post(`${API_URL}/api/notes`, noteData, {
+        const res = await axios.post(`https://social-notes.onrender.com/api/notes`, noteData, {
           headers: { 'x-auth-token': token }
         });
         setNotes((prevNotes) => [res.data, ...prevNotes]);
