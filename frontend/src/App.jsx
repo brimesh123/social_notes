@@ -12,7 +12,7 @@ import './App.css';
 function App() {
   const handleLogout = () => {
     localStorage.removeItem('token');
-    window.location.href = 'https://social-notes.onrender.com/login';
+    window.location.href = 'https://social-notes-one.vercel.app/login';
   };
 
   return (
