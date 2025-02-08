@@ -5,7 +5,6 @@ import debounce from 'lodash.debounce';
 import './ProfileSearch.css';
 import { API_URL } from '../../src/config'; // Adjust path as needed
 
-
 const ProfileSearch = () => {
   const [query, setQuery] = useState('');
   const [users, setUsers] = useState([]);
@@ -13,6 +12,7 @@ const ProfileSearch = () => {
   const [publicNotes, setPublicNotes] = useState([]);
   const [passkeyModalOpen, setPasskeyModalOpen] = useState(false);
   const [enteredPasskey, setEnteredPasskey] = useState('');
+  const [loading, setLoading] = useState(false); // Loader state
   const token = localStorage.getItem('token');
 
   // Function to search for users
@@ -40,6 +40,7 @@ const ProfileSearch = () => {
 
   // Function to fetch public notes, with an optional passkey parameter
   const fetchPublicNotes = async (userId, passkey = '') => {
+    setLoading(true); // Start loader
     try {
       const url = passkey
         ? `https://social-notes.onrender.com/api/search/notes/${userId}?passkey=${encodeURIComponent(passkey)}`
@@ -61,6 +62,8 @@ const ProfileSearch = () => {
       } else {
         console.error(err);
       }
+    } finally {
+      setLoading(false); // Stop loader regardless of outcome
     }
   };
 
@@ -118,17 +121,21 @@ const ProfileSearch = () => {
             ← Back to Search
           </button>
           <h1 className="notes-header">Public Notes by {selectedUser.name}</h1>
-          {publicNotes.length === 0 ? (
-            <p className="no-notes">No public notes available for this user.</p>
+          {loading ? (
+            <div className="loader">Loading public notes...</div>
           ) : (
-            <div className="notes-grid">
-              {publicNotes.map(note => (
-                <div key={note._id} className="note-card">
-                  <h2 className="note-title">{note.title}</h2>
-                  <p className="note-content">{note.content}</p>
-                </div>
-              ))}
-            </div>
+            publicNotes.length === 0 ? (
+              <p className="no-notes">No public notes available for this user.</p>
+            ) : (
+              <div className="notes-grid">
+                {publicNotes.map(note => (
+                  <div key={note._id} className="note-card">
+                    <h2 className="note-title">{note.title}</h2>
+                    <p className="note-content">{note.content}</p>
+                  </div>
+                ))}
+              </div>
+            )
           )}
         </div>
       )}
