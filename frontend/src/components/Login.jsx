@@ -20,7 +20,7 @@ const Login = () => {
     console.log('Submitting login form with data:', formData);
 
     try {
-      const res = await axios.post(`${API_URL}/api/auth/login`, formData);
+      const res = await axios.post('https://social-notes.onrender.com/api/auth/login', formData);
       console.log('Login successful, received response:', res.data);
       localStorage.setItem('token', res.data.token);
       navigate('/');
