@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import debounce from 'lodash.debounce';
 import './ProfileSearch.css';
+import { API_URL } from '../../src/config'; // Adjust path as needed
+
 
 const ProfileSearch = () => {
   const [query, setQuery] = useState('');
@@ -20,7 +22,7 @@ const ProfileSearch = () => {
       return;
     }
     try {
-      const res = await axios.get(`http://localhost:5000/api/search/users?q=${searchQuery}`, {
+      const res = await axios.get(`${API_URL}/api/search/users?q=${searchQuery}`, {
         headers: { 'x-auth-token': token }
       });
       setUsers(res.data);
@@ -40,8 +42,8 @@ const ProfileSearch = () => {
   const fetchPublicNotes = async (userId, passkey = '') => {
     try {
       const url = passkey
-        ? `http://localhost:5000/api/search/notes/${userId}?passkey=${encodeURIComponent(passkey)}`
-        : `http://localhost:5000/api/search/notes/${userId}`;
+        ? `${API_URL}/api/search/notes/${userId}?passkey=${encodeURIComponent(passkey)}`
+        : `${API_URL}/api/search/notes/${userId}`;
       const res = await axios.get(url, {
         headers: { 'x-auth-token': token }
       });
