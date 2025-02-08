@@ -21,7 +21,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get('${API_URL}/api/profile', {
+        const res = await axios.get('https://social-notes.onrender.com/api/profile', {
           headers: { 'x-auth-token': token },
         });
         setProfile(res.data);
@@ -44,7 +44,7 @@ const Profile = () => {
     try {
       const formData = new FormData();
       formData.append('photo', file);
-      const res = await axios.post('${API_URL}/api/upload', formData, {
+      const res = await axios.post('https://social-notes.onrender.com/api/upload', formData, {
         headers: {
           'x-auth-token': token,
           'Content-Type': 'multipart/form-data',
@@ -62,7 +62,7 @@ const Profile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put('${API_URL}/api/profile', profile, {
+      const res = await axios.put('https://social-notes.onrender.com/api/profile', profile, {
         headers: { 'x-auth-token': token },
       });
       setProfile(res.data);
