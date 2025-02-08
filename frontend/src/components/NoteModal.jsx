@@ -52,7 +52,7 @@ const NoteModal = ({ isOpen, onClose, onSubmit, initialData }) => {
     try {
       const uploadData = new FormData();
       uploadData.append('photo', file);
-      const res = await axios.post('http://localhost:5000/api/upload', uploadData, {
+      const res = await axios.post('${API_URL}/api/upload', uploadData, {
         headers: {
           'x-auth-token': token,
           'Content-Type': 'multipart/form-data'
