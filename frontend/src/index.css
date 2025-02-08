@@ -16,6 +16,17 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+.form-container {
+  margin-right: 40% !important;
+  margin: 2rem -2% !important;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px #0000001a;
+}
+
+
 a {
   font-weight: 500;
   color: #646cff;
