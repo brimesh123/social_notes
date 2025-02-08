@@ -10,17 +10,29 @@ const Login = () => {
   const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
 
-  const onChange = (e) =>
+  const onChange = (e) => {
+    console.log(`Input changed: ${e.target.name} = ${e.target.value}`);
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    console.log('Submitting login form with data:', formData);
+
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', formData);
+      const res = await axios.post(`${API_URL}/api/auth/login`, formData);
+      console.log('Login successful, received response:', res.data);
       localStorage.setItem('token', res.data.token);
       navigate('/');
     } catch (err) {
-      setErrors(err.response.data.errors || []);
+      console.error('Error during login request:', err);
+      if (err.response) {
+        console.error('Error response data:', err.response.data);
+        setErrors(err.response.data.errors || []);
+      } else {
+        console.error('No response from server:', err);
+        setErrors([{ msg: 'No response from server. Please try again later.' }]);
+      }
     }
   };
 
